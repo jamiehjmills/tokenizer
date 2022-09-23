@@ -19,16 +19,13 @@ import java.sql.Statement;
 public class PostgresConnection implements DBConnection {
 
     @Autowired
-    ConfigProperties configProp;
-
-    @Autowired
     TokenDb tokenDb;
 
     private static final Logger logger = LoggerFactory.getLogger(PostgresConnection.class);
 
     @Override
     @SneakyThrows
-    public void connection() {
+    public void startConnecting() {
 
         Connection tokenConn = DriverManager.getConnection(tokenDb.getUrl(), tokenDb.getUser(), tokenDb.getPw());
         logger.info("Connecting...");

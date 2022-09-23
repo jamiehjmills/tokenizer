@@ -1,6 +1,17 @@
 package hj.project.token.services;
 
-public interface MainTokenizer {
-    public void init(); // initialising db
+import hj.project.token.connections.DBConnection;
+import lombok.Setter;
+import org.springframework.beans.factory.annotation.Autowired;
+
+@Setter
+public class MainTokenizer {
+
+    @Autowired
+    DBConnection dbConnection;
+
+    public void init(){
+        dbConnection.startConnecting();
+    }
 
 }

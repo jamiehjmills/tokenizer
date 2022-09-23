@@ -1,11 +1,6 @@
 package hj.project.token.services;
 
-public class DeTokenizer implements MainTokenizer{
-
-    @Override
-    public void init() {
-
-    }
+public class DeTokenizer extends MainTokenizer{
 
     public String returnValue(String token) {
         return null;

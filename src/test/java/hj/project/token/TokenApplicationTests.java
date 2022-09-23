@@ -16,7 +16,7 @@ class TokenApplicationTests {
     PostgresConnection postgresConnection;
     @Test
     void contextLoads() {
-        postgresConnection.connection();
+        postgresConnection.startConnecting();
     }
 
 }
