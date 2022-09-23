@@ -30,9 +30,13 @@ public class PostgresConnection implements DBConnection{
     @SneakyThrows
     public void connection() {
 
-        System.out.println(tokenDb.getPw());
+        Connection tokenConn = DriverManager.getConnection(tokenDb.getUrl(), tokenDb.getUser(), tokenDb.getPw());
+
+        logger.info("Connecting...");
+
 
     }
+
 
 
 }
