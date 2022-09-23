@@ -16,7 +16,12 @@ import org.springframework.stereotype.Component;
 public class TokenDb {
 
     String db;
+    String host;
+    String port;
     String url;
     String schema;
+    String table;
+    String user;
+    String pw;
 
 }
