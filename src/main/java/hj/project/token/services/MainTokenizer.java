@@ -20,14 +20,5 @@ public abstract class MainTokenizer {
         dbConnection.startConnecting();
     }
 
-    public abstract String process(String input);
-
 }
 
-//public interface MainTokenizer {
-//
-//    public void init();
-//
-//    public String process(String input);
-//
-//}

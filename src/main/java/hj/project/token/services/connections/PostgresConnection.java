@@ -77,6 +77,8 @@ public class PostgresConnection implements DBConnection {
     /**
      * Returning a hash and saving it into the list
      */
+
+    @Override
     public List<String> returningHash(String token) {
 
         List<String> list = new ArrayList<>();
@@ -103,3 +105,5 @@ public class PostgresConnection implements DBConnection {
     }
 
 }
+
+//TODO: catch exceptiong should work (not just a warning)
