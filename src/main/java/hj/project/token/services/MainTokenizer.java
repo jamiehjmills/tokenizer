@@ -6,16 +6,15 @@ import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
 
 @Setter
-public class MainTokenizer {
+public abstract class MainTokenizer {
 
-    @Autowired
     DBConnection dbConnection;
-
-    @Autowired
     Hashing hashing;
 
     public void init(){
         dbConnection.startConnecting();
     }
+
+    public abstract String process(String input);
 
 }

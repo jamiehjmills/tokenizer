@@ -2,7 +2,9 @@ package hj.project.token.services;
 
 public class DeTokenizer extends MainTokenizer{
 
-    public String returnValue(String token) {
+
+    @Override
+    public String process(String token) {
         return null;
     }
 }
