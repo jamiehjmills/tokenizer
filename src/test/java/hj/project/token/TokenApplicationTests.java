@@ -1,8 +1,6 @@
 package hj.project.token;
 
-import hj.project.token.connections.PostgresConnection;
-import hj.project.token.services.MainTokenizer;
-import hj.project.token.services.Tokenizer;
+import hj.project.token.services.connections.PostgresConnection;
 import hj.project.token.services.hashing.Base64Hash;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
@@ -17,6 +15,8 @@ import java.security.NoSuchAlgorithmException;
 class TokenApplicationTests {
 
     @Autowired
+    PostgresConnection postgresConnection;
+    @Autowired
     Base64Hash hashCreator;
     @Test
     void hashingTest() throws NoSuchAlgorithmException {
@@ -26,9 +26,16 @@ class TokenApplicationTests {
     }
 
     @Test
-    void tokenizerTest(){
-        MainTokenizer tokenizer = new Tokenizer();
-        tokenizer.process("test");
+    void postgresConnectionTest(){
+        postgresConnection.startConnecting();
+        //postgresConnection.insertingHash("3334", "hi");
+        System.out.println(postgresConnection.returningHash("3334"));
     }
+
+//    @Test
+//    void tokenizerTest(){
+//        MainTokenizer tokenizer = new Tokenizer();
+//        tokenizer.process("test");
+//    }
 
 }

@@ -1,6 +1,5 @@
 package hj.project.token.services.hashing;
 
-import hj.project.token.services.hashing.Hashing;
 import org.apache.tomcat.util.codec.binary.Base64;
 import org.springframework.stereotype.Service;
 
