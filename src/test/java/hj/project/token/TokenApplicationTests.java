@@ -60,4 +60,16 @@ class TokenApplicationTests {
 
     }
 
+    @Test
+    void testingForAnything(){
+
+        int big = 'A';
+        int small = 'a';
+
+        System.out.println(big);
+        System.out.println(small);
+
+
+    }
+
 }
