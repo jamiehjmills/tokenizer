@@ -27,12 +27,14 @@ public class Tokenize extends MainTokenizer {
     public String creatingToken(char[] hash) {
 
         int[] listOfNums = new int[hash.length];
+        StringBuilder sb = new StringBuilder(hash.length);
 
         for (int i = 0; i < hash.length; i++) {
             listOfNums[i] = hash[i] - 'A';
+            sb.append(listOfNums[i]);
         }
 
-        return listOfNums.toString();
+        return sb.toString();
     }
 
     public List<String> decode(String token) {

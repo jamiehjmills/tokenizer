@@ -26,7 +26,7 @@ class TokenApplicationTests {
     TokenizerService tokenizerService;
 
     @Autowired
-    MainTokenizer tokenizer;
+    Tokenize tokenize;
 
     @Test
     void hashingTest() throws NoSuchAlgorithmException {
@@ -52,11 +52,14 @@ class TokenApplicationTests {
     @Test
     void tokenizerTest2(){ //user can customise DB and Hash
 
-        tokenizer = new Tokenize(postgresConnection, hashCreator);
+        tokenize = new Tokenize(postgresConnection, hashCreator);
 
-        tokenizer.init();
+        tokenize.init();
         //tokenizer.encode("testt");
-        tokenizer.decode("1234");
+        //tokenize.decode("1234");
+        String list = "testt";
+        System.out.println(tokenize.creatingToken(list.toCharArray()));
+
 
     }
 
