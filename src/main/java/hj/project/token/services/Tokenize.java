@@ -2,39 +2,24 @@ package hj.project.token.services;
 
 import hj.project.token.services.connections.DBConnection;
 import hj.project.token.services.hashing.Hashing;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.jboss.jandex.Main;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
 
-//TODO: NEED TO BE REMOVED
-@Service
-public class Tokenizer{
-
-    private static final Logger logger = LoggerFactory.getLogger(Tokenizer.class);
-
-    DBConnection dbConnection;
-    Hashing hashing;
-
+@Component
+public class Tokenize extends MainTokenizer {
 
     @Autowired
-    public Tokenizer(DBConnection dbConnection, Hashing hashing) {
-
-        this.dbConnection = dbConnection;
-        this.hashing = hashing;
-
+    public Tokenize(DBConnection dbConnection, Hashing hashing) {
+        super(dbConnection, hashing);
     }
 
-    public void init(){
+    @Override
+    public String encode(String value) {
 
-        dbConnection.startConnecting();
-
-    }
-
-    public String encode(String value){
         String hash = hashing.encode(value);
         // TODO: creating hash
         String token = "1234";

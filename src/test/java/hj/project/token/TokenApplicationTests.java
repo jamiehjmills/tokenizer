@@ -1,5 +1,7 @@
 package hj.project.token;
 
+import hj.project.token.services.MainTokenizer;
+import hj.project.token.services.Tokenize;
 import hj.project.token.services.TokenizerService;
 import hj.project.token.services.connections.PostgresConnection;
 import hj.project.token.services.hashing.Base64Hash;
@@ -23,6 +25,9 @@ class TokenApplicationTests {
     @Autowired
     TokenizerService tokenizerService;
 
+    @Autowired
+    MainTokenizer tokenizer;
+
     @Test
     void hashingTest() throws NoSuchAlgorithmException {
        // postgresConnection.startConnecting();
@@ -38,9 +43,20 @@ class TokenApplicationTests {
     }
 
     @Test
-    void tokenizerTest(){
+    void tokenizerTest(){ //no user can customise DB and Hash
         tokenizerService.init();
-        tokenizerService.encode("test");
+        tokenizerService.encode("testtt");
+
+    }
+
+    @Test
+    void tokenizerTest2(){ //user can customise DB and Hash
+
+        tokenizer = new Tokenize(postgresConnection, hashCreator);
+
+        tokenizer.init();
+        //tokenizer.encode("testt");
+        tokenizer.decode("1234");
 
     }
 

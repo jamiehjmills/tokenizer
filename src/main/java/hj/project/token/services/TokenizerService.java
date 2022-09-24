@@ -14,11 +14,14 @@ public class TokenizerService {
     @Autowired
     Base64Hash base64Hash;
 
-    Tokenizer tokenizer;
+    //Tokenizer tokenizer;
+    MainTokenizer tokenizer;
 
     public void init(){
 
-        this.tokenizer = new Tokenizer(postgresConnection, base64Hash);
+        //this.tokenizer = new Tokenizer(postgresConnection, base64Hash);
+        //tokenizer.init();
+        this.tokenizer= new Tokenize(postgresConnection, base64Hash);
         tokenizer.init();
 
     }
