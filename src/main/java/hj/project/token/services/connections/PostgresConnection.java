@@ -11,8 +11,6 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
 
 @Component
 public class PostgresConnection implements DBConnection {
@@ -55,18 +53,21 @@ public class PostgresConnection implements DBConnection {
     }
 
     /**
-     * Inserting token and hash into the table
+     * Inserting a token and hash into the table
      */
     @SneakyThrows
     @Override
     public void insertingHash(String token, String hash) {
 
         try {
-            String sql = String.format("INSERT INTO %s" +
-                    "(token, hash)" +
-                    "VALUES('%s','%s')", table, token, hash);
-            tokenConn.prepareStatement(sql).execute();
-            logger.info("Inserting has been completed");
+
+            if (!checkingDuplicates(token, hash)) {
+                String sql = String.format("INSERT INTO %s" +
+                        "(token, hash)" +
+                        "VALUES('%s','%s')", table, token, hash);
+                tokenConn.prepareStatement(sql).execute();
+                logger.info("Inserting has been completed");
+            }
 
         } catch (SQLException e) {
             logger.warn(e.getMessage());
@@ -74,14 +75,31 @@ public class PostgresConnection implements DBConnection {
 
     }
 
+    @SneakyThrows
+    public boolean checkingDuplicates(String token, String hash) {
+
+        try {
+            String sql = String.format("select id from %s " +
+                    "where token = '%s' and hash = '%s'", table, token, hash);
+            ResultSet rs = tokenConn.prepareStatement(sql).executeQuery();
+
+            // if there is nothing from the DB, rs.next() returns false
+            return rs.next();
+        } catch (SQLException e) {
+            logger.warn(e.getMessage());
+        }
+
+        return false;
+
+    }
+
     /**
      * Returning a hash and saving it into the list
      */
-
     @Override
-    public List<String> returningHash(String token) {
+    public String returningHash(String token) {
 
-        List<String> list = new ArrayList<>();
+        String hash = null;
 
         try {
             String sql = String.format("select hash from %s " +
@@ -89,19 +107,15 @@ public class PostgresConnection implements DBConnection {
             ResultSet rs = tokenConn.prepareStatement(sql).executeQuery();
 
             while (rs.next()) {
-
-                String hash = rs.getString("hash");
-                list.add(hash);
-
+                hash = rs.getString("hash");
             }
-
             logger.info("The list of Hash is ready");
 
         } catch (SQLException e) {
             logger.warn(e.getMessage());
         }
 
-        return list;
+        return hash;
     }
 
 }

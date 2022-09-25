@@ -11,24 +11,15 @@ public class Base64Hash implements Hashing {
 
     @Override
     public String encode(String input) {
-
         byte[] bytesEncoded = Base64.encodeBase64(input.getBytes());
-        System.out.println("encoded value is " + new String(bytesEncoded));
-
         return new String(bytesEncoded);
-
     }
 
     @Override
     public String decode(String valueEncoded) {
-
         byte[] valueDecoded = Base64.decodeBase64(valueEncoded);
-        System.out.println("Decoded value is " + new String(valueDecoded));
-
         return new String(valueDecoded);
-
     }
-
 
 }
 

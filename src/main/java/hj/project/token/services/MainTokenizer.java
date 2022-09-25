@@ -4,8 +4,6 @@ import hj.project.token.services.connections.DBConnection;
 import hj.project.token.services.hashing.Hashing;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import java.util.List;
-
 
 public abstract class MainTokenizer {
 
@@ -24,7 +22,7 @@ public abstract class MainTokenizer {
 
     public abstract String encode(String value);
 
-    public abstract List<String> decode(String value);
+    public abstract String decode(String value);
 
 }
 

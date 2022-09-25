@@ -4,9 +4,6 @@ import hj.project.token.services.connections.DBConnection;
 import hj.project.token.services.hashing.Hashing;
 import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
-import java.util.List;
-
 @Component
 public class Tokenize extends MainTokenizer {
 
@@ -37,16 +34,8 @@ public class Tokenize extends MainTokenizer {
         return sb.toString();
     }
 
-    public List<String> decode(String token) {
-        List<String> listOfHash = dbConnection.returningHash(token);
-        List<String> list = new ArrayList<>();
-
-        //TODO: need to do something for listOfHash --> make sure it only returns one String
-        for (String hash : listOfHash) {
-            String decodedValue = hashing.decode(hash);
-            list.add(decodedValue);
-        }
-
-        return list;
+    public String decode(String token) {
+        String hash = dbConnection.returningHash(token);
+        return hashing.decode(hash);
     }
 }
