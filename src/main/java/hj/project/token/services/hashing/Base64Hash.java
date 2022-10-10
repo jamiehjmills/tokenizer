@@ -16,8 +16,10 @@ public class Base64Hash implements Hashing {
     }
 
     @Override
-    public String decode(String valueEncoded) {
-        byte[] valueDecoded = Base64.decodeBase64(valueEncoded);
+    public String decode(String token, String valueEncoded) {
+        byte[] valueDecoded;
+        if (valueEncoded == null) return token;
+        valueDecoded = Base64.decodeBase64(valueEncoded);
         return new String(valueDecoded);
     }
 

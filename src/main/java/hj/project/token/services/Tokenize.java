@@ -36,6 +36,6 @@ public class Tokenize extends MainTokenizer {
 
     public String decode(String token) {
         String hash = dbConnection.returningHash(token);
-        return hashing.decode(hash);
+        return hashing.decode(token, hash);
     }
 }

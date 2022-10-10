@@ -46,8 +46,8 @@ public class PostgresConnection implements DBConnection {
             tokenConn.prepareStatement(sql).execute();
             logger.info(String.format("Table(%s) has been completed", table));
 
-        } catch (SQLException e) {
-            logger.warn(e.getMessage());
+        } catch (Exception e) {
+            logger.error(e.getMessage());
         }
 
     }
@@ -69,8 +69,8 @@ public class PostgresConnection implements DBConnection {
                 logger.info("Inserting has been completed");
             }
 
-        } catch (SQLException e) {
-            logger.warn(e.getMessage());
+        } catch (Exception e) {
+            logger.error(e.getMessage());
         }
 
     }
@@ -85,7 +85,7 @@ public class PostgresConnection implements DBConnection {
 
             // if there is nothing from the DB, rs.next() returns false
             return rs.next();
-        } catch (SQLException e) {
+        } catch (Exception e) {
             logger.warn(e.getMessage());
         }
 
@@ -111,13 +111,10 @@ public class PostgresConnection implements DBConnection {
             }
             logger.info("The list of Hash is ready");
 
-        } catch (SQLException e) {
-            logger.warn(e.getMessage());
+        } catch (Exception e) {
+            logger.error(e.getMessage());
         }
-
         return hash;
     }
 
 }
-
-//TODO: catch exceptiong should work (not just a warning)
